@@ -18,7 +18,8 @@ public class TestCalculater extends JFrame {
 	JPanel cardPanel, a1, a2;
 	JTextField t, t1, t2, t3;
 	JPanel p;
-	String mix1, min2, mix3; // 더할 변수?
+	String mix1, mix2, mix3; // 더할 변수?
+	int result;
 	double b;
 
 	TestCalculater() {
@@ -72,12 +73,38 @@ public class TestCalculater extends JFrame {
 
 						mix1 = currentText;
 
-						cd.show(cardPanel, "card2");
+						cd.show(cardPanel, "Cd2");
 
 						t1.setText("");
+					} else if (c.equals("=")) {
+					    mix1 = currentText; // t1에서 입력받은 두 번째 숫자
+
+					
+					    if (mix1 != null && mix2 != null) {
+					        int n1 = Integer.parseInt(mix1);
+					        int n2 = Integer.parseInt(mix2);
+
+					        result = n1 + n2; 
+
+					        
+					        t3.setText(String.valueOf(result));
+					    } else {
+					        t2.setText("Input Error"); 
+					    }
+					    
+					    cd.show(cardPanel, "Cd3");
+					    t2.setText(""); 
+					
+					    
+					    t3.setText(Integer.toString(result));
+					
+						
 					} else if (c.equals("X")) { // 초기화 버튼
 						t1.setText(""); // 초기화
-					} else if (currentText.equals("0")) { // 만약 현재 텍스트가 0이라면
+						mix1 = null;
+						mix2 = null;
+						mix3 = null;
+						} else if (currentText.equals("0")) { // 만약 현재 텍스트가 0이라면
 						t1.setText(c); // t1에 c의 값을 세팅
 					} else { // 현재 텍스트가 0이 아니고 초기화 버튼이 아닐 때
 						t1.setText(currentText + c); // 현재 텍스트 필드 값에 c를 추가

@@ -15,8 +15,9 @@ public class TestCalculater extends JFrame {
 	JPanel cardPanel;
 	JTextField t1, t2, t3; // t1: 첫 번째 숫자, t2: 두 번째 숫자, t3: 결과
 	JPanel p;
-	String mix1, mix2; // 연산에 사용할 변수
+	String mix1, mix2, reuslt; // 연산에 사용할 변수 추가로 다시 연산시 넣어줄 스트링 값을 추가
 	String currentOperation; // 현재 연산자를 저장할 변수
+	
 
 	TestCalculater() {
 		setTitle("계산기");
@@ -93,7 +94,7 @@ public class TestCalculater extends JFrame {
 						currentOperation = c; // 현재 연산자 저장
 						cd.show(cardPanel, "Cd2"); // 두 번째 카드로 전환
 						t1.setText(""); // 첫 번째 입력 필드 초기화
-
+						t2.setText("0"); // 다시 연산을 하려고 할때 t2를 0으로 바꾸는 코드
 					} else if (c.equals("C")) { // 초기화 버튼
 						t1.setText("0"); // 첫 번째 필드 초기화
 						t2.setText("0"); // 두 번째 필드 초기화
@@ -123,4 +124,3 @@ public class TestCalculater extends JFrame {
 	public static void main(String[] args) {
 		new TestCalculater();
 	}
-}

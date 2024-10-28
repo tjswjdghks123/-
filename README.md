@@ -15,9 +15,8 @@ public class TestCalculater extends JFrame {
 	JPanel cardPanel;
 	JTextField t1, t2, t3; // t1: 첫 번째 숫자, t2: 두 번째 숫자, t3: 결과
 	JPanel p;
-	String mix1, mix2, reuslt; // 연산에 사용할 변수 추가로 다시 연산시 넣어줄 스트링 값을 추가
+	String mix1, mix2, result;// 연산에 사용할 변수
 	String currentOperation; // 현재 연산자를 저장할 변수
-	
 
 	TestCalculater() {
 		setTitle("계산기");
@@ -50,7 +49,7 @@ public class TestCalculater extends JFrame {
 		add(cardPanel, BorderLayout.CENTER); // 카드 패널 추가
 
 		String[][] Text = { { " ", " ", " ", "C" }, { "7", "8", "9", "x" }, { "4", "5", "6", "-" },
-				{ "1", "2", "3", "+" }, { " ", "0", "/", "=" } };
+				{ "1", "2", "3", "+" }, { "±", "0", "÷", "=" } };
 
 		p = new JPanel(new GridLayout(5, 4, 2, 2)); // 5x4 버튼 배치
 
@@ -75,7 +74,7 @@ public class TestCalculater extends JFrame {
 						mix2 = t2.getText(); // 두 번째 숫자 저장
 						int result = 0;
 
-						if (currentOperation != null) { // 연산자가 설정되어 있으면
+						if (currentOperation != null) {
 							if (currentOperation.equals("+")) {
 								result = Integer.parseInt(mix1) + Integer.parseInt(mix2);
 							} else if (currentOperation.equals("-")) {
@@ -86,15 +85,28 @@ public class TestCalculater extends JFrame {
 								result = Integer.parseInt(mix1) / Integer.parseInt(mix2);
 							}
 							t3.setText(String.valueOf(result)); // 결과 표시
+							mix1 = String.valueOf(result);
 							cd.show(cardPanel, "Cd3"); // 결과 카드로 전환
 						}
 
-					} else if (c.equals("+") || c.equals("-") || c.equals("x") || c.equals("/")) {
+					} else if (c.equals("+") || c.equals("-") || c.equals("x") || c.equals("/")) { // 연산자 버튼이 눌릴 때
+						if (t3.isShowing()) { // 이전에 한 번 결과가 왔다면.
+							mix1 = t3.getText(); // t3의 결과를 mix1에 저장
+							t1.setText(mix1); // t1에도 결과 표시
+							cd.show(cardPanel, "Cd1"); // 첫 번째 카드로 전환
+						} else {
+							mix1 = t1.getText(); // 첫 번째 숫자 저장
+						}
+						//연산하는 코드들.
+						currentOperation = c; // 현재 연산자 저장
+						cd.show(cardPanel, "Cd2"); // 두 번째 카드로 전환
+						t2.setText("0"); // 두 번째 입력 필드 초기화
 						mix1 = t1.getText(); // 첫 번째 숫자 저장
 						currentOperation = c; // 현재 연산자 저장
 						cd.show(cardPanel, "Cd2"); // 두 번째 카드로 전환
 						t1.setText(""); // 첫 번째 입력 필드 초기화
 						t2.setText("0"); // 다시 연산을 하려고 할때 t2를 0으로 바꾸는 코드
+						//여기까지.
 					} else if (c.equals("C")) { // 초기화 버튼
 						t1.setText("0"); // 첫 번째 필드 초기화
 						t2.setText("0"); // 두 번째 필드 초기화
@@ -124,3 +136,4 @@ public class TestCalculater extends JFrame {
 	public static void main(String[] args) {
 		new TestCalculater();
 	}
+}

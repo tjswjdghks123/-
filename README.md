@@ -17,7 +17,6 @@ public class TestCalculater extends JFrame {
 	JPanel p;
 	String mix1, mix2, result;// 연산에 사용할 변수
 	String currentOperation; // 현재 연산자를 저장할 변수
-	int cV;
 
 	TestCalculater() {
 		setTitle("계산기");
@@ -26,21 +25,21 @@ public class TestCalculater extends JFrame {
 		cd = new CardLayout();
 		cardPanel = new JPanel(cd);
 
-		// 첫 번째 카드: t1 텍스트 필드를 포함하는 패널
+		// 첫번째 카드 t1를 포함하는 패널
 		JPanel firstCard1 = new JPanel();
 		t1 = new JTextField("0", 27);
-		t1.setHorizontalAlignment(JTextField.RIGHT); // 숫자 오른쪽정렬
+		t1.setHorizontalAlignment(JTextField.RIGHT); // 숫자 오른쪽정렬하는 메소드
 		firstCard1.add(t1);
 		cardPanel.add(firstCard1, "Cd1");
 
-		// 두 번째 카드: t2 텍스트 필드를 포함하는 패널
+		// 두번째 카드 t1를 포함하는 패널
 		JPanel firstCard2 = new JPanel();
 		t2 = new JTextField("0", 27);
 		t2.setHorizontalAlignment(JTextField.RIGHT);
 		firstCard2.add(t2);
 		cardPanel.add(firstCard2, "Cd2");
 
-		// 세 번째 카드: t3 텍스트 필드를 포함하는 패널
+		// 세번째 카드 t1를 포함하는 패널
 		JPanel firstCard3 = new JPanel();
 		t3 = new JTextField("0", 27);
 		t3.setHorizontalAlignment(JTextField.RIGHT);
@@ -49,7 +48,7 @@ public class TestCalculater extends JFrame {
 
 		add(cardPanel, BorderLayout.CENTER); // 카드 패널 추가
 
-		String[][] Text = { { " ", " ", " ", "C" }, { "7", "8", "9", "x" }, { "4", "5", "6", "-" },
+		String[][] Text = { { "10", "11", "12", "C" }, { "7", "8", "9", "x" }, { "4", "5", "6", "-" },
 				{ "1", "2", "3", "+" }, { "±", "0", "÷", "=" } };
 
 		p = new JPanel(new GridLayout(5, 4, 2, 2)); // 5x4 버튼 배치
@@ -73,11 +72,11 @@ public class TestCalculater extends JFrame {
 
 		            if (c.equals("=")) { // 결과 버튼 클릭 시
 		                mix2 = t2.getText(); // 두 번째 숫자 저장
-		                int result = 0;
+		                int result = 0; //결과를 담은 변수
 
-		                if (currentOperation != null) {
+		                if (currentOperation != null) { //현제값이 빈 값이 아닐때 
 		                    if (currentOperation.equals("+")) {
-		                        result = Integer.parseInt(mix1) + Integer.parseInt(mix2);
+		                        result = Integer.parseInt(mix1) + Integer.parseInt(mix2); //문자열을 인트로 바꿔서 연산
 		                    } else if (currentOperation.equals("-")) {
 		                        result = Integer.parseInt(mix1) - Integer.parseInt(mix2);
 		                    } else if (currentOperation.equals("x")) {
